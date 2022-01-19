@@ -1,11 +1,38 @@
-*,
+@font-face {
+	font-family: 'product-sans';
+	src: url(../src/assets/Product\ Sans\ Regular.ttf);
+}
+@font-face {
+	font-family: 'product-sans';
+	src: url(../src/assets/Product\ Sans\ Bold.ttf);
+	font-weight: bold;
+}
+* {
+	font-family: product-sans !important;
+}
 *:before,
 *:after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+	background-color: black;
+}
+
+.jumbotron {
+	width: 100%;
+	background-image: url('./assets/bg-jumbotron.png');
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	text-shadow: 0px 0px 5px black;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	background-repeat: no-repeat;
+}
+.modal-width {
+	max-width: 25vw;
 }

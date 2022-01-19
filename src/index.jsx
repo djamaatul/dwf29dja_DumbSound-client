@@ -1,11 +1,35 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './custom-bootstrap.scss';
+import './index.css';
+
+import ShowProvider from './contexts/ShowProvider';
+import LoginProvider from './contexts/LoginProvider';
+
+import App from '../src/App';
+
+import { Dashboard, AddMusic, AddArtist, Payment } from '../src/pages';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+	<React.StrictMode>
+		<LoginProvider>
+			<ShowProvider>
+				<Router>
+					<Routes>
+						<Route path='/' element={<App />}>
+							<Route index element={<Dashboard />} />
+							<Route path='/addartist' element={<AddArtist />} />
+							<Route path='/addmusic' element={<AddMusic />} />
+							<Route path='payment' element={<Payment />} />
+						</Route>
+						<Route path='*' element={<div>page 404</div>} />
+					</Routes>
+				</Router>
+			</ShowProvider>
+		</LoginProvider>
+	</React.StrictMode>,
+	document.getElementById('root')
 );
