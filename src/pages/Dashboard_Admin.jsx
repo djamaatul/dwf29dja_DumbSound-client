@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Navbar from '../components/Navbar';
 import DropDown from '../components/DropDown_Approve';
+import PreviewImage from '../components/modals/PreviewImage';
 
 import triangle from '../assets/icon/triangle.svg';
 
@@ -14,6 +15,7 @@ function Dashboard_Admin() {
 	const [state] = useContext(loginContext);
 	const navigate = useNavigate();
 	const [transaction, setTransaction] = useState([]);
+	const [preview, setPreview] = useState(false);
 
 	const getTransaction = async () => {
 		try {
@@ -38,7 +40,9 @@ function Dashboard_Admin() {
 	const handleUpdate = () => {
 		getTransaction();
 	};
-	const handlePreview = (e) => {};
+	const handlePreview = () => {
+		setPreview(!preview);
+	};
 	return (
 		<>
 			<Navbar className='bg-secondary shadow-sm' />
@@ -66,11 +70,18 @@ function Dashboard_Admin() {
 											href='#'
 											onClick={(ex) => {
 												ex.preventDefault();
-												handlePreview(e.attachment_link);
+												handlePreview();
 											}}
 										>
 											{e.attachment}
 										</a>
+										{preview && (
+											<PreviewImage
+												show={preview}
+												toggleShow={() => setPreview(!preview)}
+												attachment={e.attachment_link}
+											/>
+										)}
 									</td>
 									<td>
 										{e.duedate && e.startdate
