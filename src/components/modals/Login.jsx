@@ -25,7 +25,6 @@ function Login(props) {
 		try {
 			e.preventDefault();
 			const response = await API.post('/login', JSON.stringify(form), configJson);
-			console.log(response);
 			if (response.status === 200) {
 				dispatch({
 					type: 'LOGIN_SUCCESS',

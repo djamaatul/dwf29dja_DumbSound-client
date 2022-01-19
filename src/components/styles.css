@@ -17,11 +17,8 @@
 	top: 18px;
 	right: 0px;
 }
-.dp-approve {
+.dp-approve li {
 	cursor: pointer;
-}
-.dp-approve li span:hover {
-	color: gray;
 }
 .dpcontain {
 	position: relative;
@@ -61,6 +58,6 @@
 	top: -29px;
 	right: 10px;
 	border: 15px solid transparent;
-	border-bottom-color: #161616;
+	border-bottom-color: #1f1f1f;
 	filter: drop-shadow(0px -1.5px 1px rgba(0, 0, 0, 0.1));
 }

@@ -18,7 +18,7 @@ function DropDown(props) {
 			style={{ display: props.show ? 'inline-block' : 'none' }}
 			className='dropdown dp-nav me-md-5 bg-secondary font fw-bold'
 		>
-			<ul>
+			<ul onClick={() => setShow('dropdown')}>
 				{state.role == 1 ? (
 					<>
 						<li>
@@ -43,7 +43,7 @@ function DropDown(props) {
 				)}
 			</ul>
 			<hr />
-			<ul>
+			<ul onClick={() => setShow('dropdown')}>
 				<li>
 					<a
 						href='/'

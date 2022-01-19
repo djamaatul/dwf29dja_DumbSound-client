@@ -6,7 +6,6 @@ function Cards(props) {
 	const handleButton = (to) => {
 		// 	navigate(`/${to}/${props.id}`);
 	};
-	console.log(props);
 	return (
 		<div style={{ cursor: 'pointer', borderRadius: 20 }}>
 			<Card style={{ maxHeight: 300, borderRadius: 10, backgroundColor: '#3A3A3A', height: 260 }}>

@@ -1,25 +1,68 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './styles.css';
 
+import { API } from '../config/api';
+
+import AlertModal from './modals/Alert';
+
 function DropDown(props) {
-	const handleApprove = async () => {};
+	const [alert, setAlert] = useState('');
+	const [message, setMessage] = useState('');
+	const approve = async () => {
+		try {
+			const response = await API.patch(`/transaction/${props.id}`, { status: 'success' });
+			setTimeout(() => {
+				setMessage(response.data.message);
+				setAlert('success');
+				props.update();
+			}, 200);
+		} catch (error) {
+			setTimeout(() => {
+				setMessage(error.response.data.message);
+				setAlert('failed');
+				props.update();
+			}, 200);
+		}
+	};
+
+	const cancel = async () => {
+		try {
+			const response = await API.patch(`/transaction/${props.id}`, { status: 'cancel' });
+			setTimeout(() => {
+				setMessage(response.data.message);
+				setAlert('success');
+				props.update();
+			}, 200);
+		} catch (error) {
+			setTimeout(() => {
+				setMessage(error.response.data.message);
+				setAlert('failed');
+			}, 200);
+		}
+	};
+
+	const handleApprove = () => {
+		approve();
+	};
+	const handleCancel = () => {
+		cancel();
+	};
 	return (
 		<div id={`dp${props.id}`} style={{ display: 'none' }} className='dropdown dp-approve bg-secondary font fw-bold'>
 			<ul>
-				<li className='  text-success'>
-					<span onClick={handleApprove}>Approve</span>
+				<li className='text-success' onClick={handleApprove}>
+					Approve
 				</li>
-				<li className='text-primary'>
-					<span
-						onClick={() => {
-							document.getElementById(`dp${props.id}`).classList.toggle('d-block');
-						}}
-					>
-						cancel
-					</span>
+				<li className='text-primary' onClick={handleCancel}>
+					cancel
 				</li>
 			</ul>
+			{alert && (
+				<AlertModal
+					status={alert === 'success' ? 'success' : 'danger'}
+					message={message ? message : 'failed'}
+				/>
+			)}
 		</div>
 	);
 }

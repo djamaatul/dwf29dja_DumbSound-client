@@ -29,19 +29,17 @@ function Dashboad() {
 	}
 	return (
 		<>
-			<Container fluid='xxl' className='position-relative'>
-				<Navbar />
-				<Row>
-					<Col>
-						<div className='jumbotron'>
-							<h1>Connect on DumbSound</h1>
-							<p>
-								Discovery, Stream, and share a constantly expanding mix of music from emerging and major
-								artists around the world
-							</p>
-						</div>
-					</Col>
-				</Row>
+			<Container fluid='xxl' className='position-relative p-0'>
+				<div className='jumbotron'>
+					<Navbar />
+					<div className='d-flex h-100 align-items-center justify-content-center flex-column'>
+						<h1>Connect on DumbSound</h1>
+						<p>
+							Discovery, Stream, and share a constantly expanding mix of music from emerging and major
+							artists around the world
+						</p>
+					</div>
+				</div>
 				<Row>
 					<Col sm={12} className='d-flex justify-content-center p-3'>
 						<h2 className='text-primary'>Dengarkan Dan Rasakan</h2>

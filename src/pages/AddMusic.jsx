@@ -73,7 +73,7 @@ function AddMusic() {
 	};
 	return (
 		<>
-			<Navbar bg='bg-secondary' />
+			<Navbar className='bg-secondary shadow-sm' />
 			<Container fluid='xl' className='text-white'>
 				<Row className='mt-5'>
 					<Col xs={12}>

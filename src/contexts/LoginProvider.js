@@ -11,7 +11,6 @@ const reducer = (state, action) => {
 	switch (type) {
 		case 'RELOGIN_SUCCESS':
 		case 'LOGIN_SUCCESS':
-			console.log(payload);
 			localStorage.setItem('token', payload.token);
 			return {
 				isLogin: true,

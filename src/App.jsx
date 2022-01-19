@@ -6,7 +6,6 @@ import { API, setAuthToken } from './config/api';
 
 const App = () => {
 	const [state, dispatch] = useContext(loginContext);
-	console.log(state);
 	useEffect(async () => {
 		if (localStorage.token) {
 			try {

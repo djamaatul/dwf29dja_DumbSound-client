@@ -53,18 +53,18 @@ function Payment() {
 	};
 	return (
 		<>
-			<Navbar bg='bg-secondary' />
+			<Navbar className='bg-transparent' />
 			<Container fluid='xxl' className='text-white'>
 				<Row>
-					<Col xs={12} className='d-flex justify-content-center mt-5 pt-5'>
-						<h1>Premium</h1>
+					<Col xs={12} className='d-flex justify-content-center mt-5 pt-5 '>
+						<h2 className='fw-bold'>Premium</h2>
 					</Col>
 					<Col xs={12} className='d-flex justify-content-center my-3'>
-						<h4>
+						<h5>
 							Bayar sekarang dan nikmati streaming music yang kekinian dari
 							<span className='text-primary'> DUMB</span>
 							<span className='text-white'>SOUND</span>
-						</h4>
+						</h5>
 					</Col>
 					<Col xs={12} className='d-flex justify-content-center my-3'>
 						<h4 className='ms-3 fw-bold'>
@@ -85,13 +85,13 @@ function Payment() {
 							</Form.Group>
 							<Form.Group className='mb-3 position-relative'>
 								<Button
-									className='w-100 text-primary  d-flex  justify-content-between'
-									style={{ backgroundColor: '#D2D2D240', color: 'white', border: '2px solid white' }}
+									className='w-100 text-primary  d-flex  justify-content-between bg-transparent'
+									style={{ color: 'white', border: '2px solid white' }}
 								>
 									Attache proof of transfer <img src={clip} alt='' />
 								</Button>
 								<Form.Control
-									className='position-absolute top-0 w-100'
+									className='position-absolute top-0 w-100 '
 									style={{ opacity: '0%' }}
 									type='file'
 									onChange={(e) => {

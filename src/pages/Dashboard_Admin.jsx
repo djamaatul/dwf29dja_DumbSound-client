@@ -8,21 +8,21 @@ import DropDown from '../components/DropDown_Approve';
 import triangle from '../assets/icon/triangle.svg';
 
 import { loginContext } from '../contexts/LoginProvider';
-import { configJson, API, setAuthToken } from '../config/api';
+import { API, setAuthToken } from '../config/api';
 
 function Dashboard_Admin() {
-	const [state, dispatch] = useContext(loginContext);
+	const [state] = useContext(loginContext);
 	const navigate = useNavigate();
 	const [transaction, setTransaction] = useState([]);
-	async function getTransaction() {
+
+	const getTransaction = async () => {
 		try {
 			const response = await API.get('/transactions');
-			console.log(response.data.data);
 			setTransaction(response.data.data);
 		} catch (error) {
 			throw error;
 		}
-	}
+	};
 	useEffect(() => {
 		if (!state.isLogin) {
 			if (localStorage.token) {
@@ -35,10 +35,13 @@ function Dashboard_Admin() {
 		}
 		getTransaction();
 	}, []);
+	const handleUpdate = () => {
+		getTransaction();
+	};
 	const handlePreview = (e) => {};
 	return (
 		<>
-			<Navbar bg='bg-secondary' />
+			<Navbar className='bg-secondary shadow-sm' />
 			<Container className='p-5'>
 				<Table striped bordered hover variant='dark'>
 					<thead>
@@ -65,22 +68,36 @@ function Dashboard_Admin() {
 												ex.preventDefault();
 												handlePreview(e.attachment_link);
 											}}
-										></a>
-										{e.attachment}
+										>
+											{e.attachment}
+										</a>
 									</td>
-									<td>{e.duedate && e.startdate ? `${e.duedata - e.startdate}/Hari` : '0/Hari'}</td>
 									<td>
-										{e.status !== 'pending' ? (
+										{e.duedate && e.startdate
+											? `${
+													(parseInt(new Date(e.duedate).getTime()) -
+														parseInt(new Date(e.startdate).getTime())) /
+													(1000 * 60 * 60 * 24)
+											  }/Hari`
+											: '0/Hari'}
+									</td>
+									<td>
+										{e.startdate && e.duedate ? (
 											<span className='text-success'>Active</span>
 										) : (
 											<span className='text-primary'>Not active</span>
 										)}
 									</td>
-									<td className='text-warning'>{e.status}</td>
+									{e.status === 'success' ? (
+										<td className='text-success'>{e.status}</td>
+									) : e.status == 'pending' ? (
+										<td className='text-warning'>{e.status}</td>
+									) : (
+										<td className='text-primary'>{e.status}</td>
+									)}
 									<td width={10} className='text-center'>
 										<div
-											className=''
-											class='dpcontain'
+											className='dpcontain'
 											onClick={() => {
 												document.getElementById(`dp${e.id}`).classList.toggle('d-block');
 											}}
@@ -91,7 +108,7 @@ function Dashboard_Admin() {
 												alt='User'
 												className='d-inline-block align-top'
 											/>
-											<DropDown id={e.id} />
+											<DropDown id={e.id} update={() => handleUpdate()} />
 										</div>
 									</td>
 								</tr>

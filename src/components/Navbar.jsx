@@ -21,11 +21,11 @@ function Header(props) {
 		<>
 			<Login show={show.signin} hide={() => setShow('signin')} />
 			<Register show={show.register} hide={() => setShow('register')} />
-			<Navbar collapseOnSelect className={props?.bg ?? 'bg-transparent'}>
+			<Navbar collapseOnSelect {...props}>
 				<Container fluid='xxl'>
 					<Navbar.Brand className='ms-md-5'>
 						<Link to='/' className='text-decoration-none d-flex align-items-center'>
-							<img src={logo} width='40' height='40' className='d-inline-block align-top' alt='Logo' />
+							<img src={logo} width='30' height='30' className='d-inline-block align-top' alt='Logo' />
 							<h4 className='ms-3'>
 								<span className='text-primary'>DUMB</span>
 								<span className='text-white'>SOUND</span>
@@ -34,13 +34,13 @@ function Header(props) {
 					</Navbar.Brand>
 					<Nav className='ms-auto'></Nav>
 					{state.isLogin ? (
-						<div className='' class='dpcontain'>
+						<div className='dpcontain'>
 							<img
 								onClick={() => setShow('dropdown')}
 								style={{ cursor: 'pointer' }}
 								src={user}
-								width='60'
-								height='60'
+								width='50'
+								height='50'
 								alt='User'
 								className='d-inline-block align-top border rounded-circle border-2 border-white me-md-5'
 							/>
