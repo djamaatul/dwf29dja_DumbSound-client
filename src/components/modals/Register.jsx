@@ -10,7 +10,7 @@ import AlertModal from './Alert';
 import { configJson, API } from '../../config/api';
 
 function Register(props) {
-	const [show, setShow] = useContext(showContext);
+	const { show, setShow } = useContext(showContext);
 	const [message, setMessage] = useState(null);
 	const [alert, setAlert] = useState('');
 	const [form, setForm] = useState({
@@ -44,11 +44,12 @@ function Register(props) {
 		<>
 			<Modal
 				aria-labelledby='contained-modal-title-vcenter'
-				dialogClassName='modal-width'
+				contentClassName=' bg-transparent align-items-center'
+				dialogClassName='d-flex justify-content-center  mt-5'
 				onHide={props.hide}
 				show={props.show}
 			>
-				<Modal.Body className='bg-secondary'>
+				<Modal.Body className='bg-secondary rounded-3 '>
 					<Form onSubmit={handleSubmit}>
 						<h1 className='text-white'>Register</h1>
 						<Form.Group className='my-4' controlId='formBasicEmail'>
@@ -112,7 +113,7 @@ function Register(props) {
 										setShow('register');
 										setShow('signin');
 									}}
-									className='text-black text-decoration-none'
+									className='text-white text-decoration-none'
 									to='/'
 								>
 									Here

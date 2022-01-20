@@ -35,6 +35,6 @@ const reducer = (state, action) => {
 };
 function LoginProvider(props) {
 	const [state, dispatch] = useReducer(reducer, initialState);
-	return <loginContext.Provider value={[state, dispatch]}>{props.children}</loginContext.Provider>;
+	return <loginContext.Provider value={{ state, dispatch }}>{props.children}</loginContext.Provider>;
 }
 export default LoginProvider;

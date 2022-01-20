@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import Navbar from '../components/Navbar';
 import AlertModal from '../components/modals/Alert';
@@ -12,7 +13,9 @@ import { loginContext } from '../contexts/LoginProvider';
 import { configMulter, API, setAuthToken } from '../config/api';
 
 function AddMusic() {
-	const [state, dispatch] = useContext(loginContext);
+	document.title = 'AddMusic | DumbSound';
+
+	const { state, dispatch } = useContext(loginContext);
 	const navigate = useNavigate();
 	const [alert, setAlert] = useState('');
 	const [message, setMessage] = useState('');
@@ -31,10 +34,6 @@ function AddMusic() {
 			const response = await API.get('/artists');
 			if (response.status === 200) {
 				setArtists(response.data.data);
-				setTimeout(() => {
-					setMessage('Success');
-					setAlert('success');
-				}, 200);
 			}
 			setArtists(response.data.data);
 		} catch (error) {
@@ -43,17 +42,6 @@ function AddMusic() {
 	}
 
 	useEffect(() => {
-		if (!state.isLogin) {
-			if (localStorage.token) {
-				setAuthToken(localStorage.token);
-				state.role === 2 && navigate('/');
-			} else {
-				navigate('/');
-			}
-		} else {
-			setAuthToken(localStorage.token);
-			state.role === 2 && navigate('/');
-		}
 		getArtist();
 	}, []);
 
@@ -80,9 +68,9 @@ function AddMusic() {
 		}
 	};
 	return (
-		<>
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
 			<Navbar className='bg-secondary shadow-sm' />
-			<Container fluid='xl' className='text-white'>
+			<Container fluid='xl' className='text-white px-4 px-0'>
 				<Row className='mt-5'>
 					<Col xs={12}>
 						<h3>Add Music</h3>
@@ -192,7 +180,7 @@ function AddMusic() {
 					/>
 				)}
 			</Container>
-		</>
+		</motion.div>
 	);
 }
 

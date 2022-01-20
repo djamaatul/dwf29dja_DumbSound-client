@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button, Col, Row } from 'react-bootstrap';
+import { motion } from 'framer-motion';
 
 function Cards(props) {
 	return (
@@ -20,10 +21,10 @@ function Cards(props) {
 					<Col xs={8} className=''>
 						<Row>
 							<Col xs={12}>
-								<h5>{props?.artist.name}</h5>
+								<h5>{props.artist.slice(0, 15)}</h5>
 							</Col>
 							<Col xs={12}>
-								<p>{props?.title}</p>
+								<p>{props.title.slice(0, 20)}</p>
 							</Col>
 						</Row>
 					</Col>

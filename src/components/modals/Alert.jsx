@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Alert, Button } from 'react-bootstrap';
 
 function AlertModal(props) {
-	const [show, setShow] = useState(true);
+	const { show, setShow } = useState(true);
 
 	return (
 		<Modal show={show} onHide={() => setShow(!show)} size='sm' centered>

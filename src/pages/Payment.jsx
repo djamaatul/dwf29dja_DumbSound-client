@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import Navbar from '../components/Navbar';
 import AlertModal from '../components/modals/Alert';
@@ -8,11 +9,12 @@ import AlertModal from '../components/modals/Alert';
 import clip from '../assets/icon/clip.svg';
 
 import { loginContext } from '../contexts/LoginProvider';
-
 import { configMulter, API, setAuthToken } from '../config/api';
 
 function Payment() {
-	const [state] = useContext(loginContext);
+	document.title = 'Payment | DumbSound';
+
+	const { state } = useContext(loginContext);
 	const navigate = useNavigate();
 	const [alert, setAlert] = useState('');
 	const [message, setMessage] = useState('');
@@ -20,18 +22,6 @@ function Payment() {
 		accountnumber: '',
 		attachment: '',
 	});
-
-	useEffect(() => {
-		if (!state.isLogin) {
-			if (localStorage.token) {
-				setAuthToken(localStorage.token);
-			} else {
-				navigate('/');
-			}
-		} else {
-			setAuthToken(localStorage.token);
-		}
-	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -52,7 +42,7 @@ function Payment() {
 		}
 	};
 	return (
-		<>
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
 			<Navbar className='bg-transparent' />
 			<Container fluid='xxl' className='text-white'>
 				<Row>
@@ -119,7 +109,7 @@ function Payment() {
 					/>
 				)}
 			</Container>
-		</>
+		</motion.div>
 	);
 }
 

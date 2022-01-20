@@ -1,19 +1,25 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import Navbar from '../components/Navbar';
 import AlertModal from '../components/modals/Alert';
+import LoadingScreen from '../components/LoadingScreen';
 
 import { loginContext } from '../contexts/LoginProvider';
 
 import { API, setAuthToken, configJson } from '../config/api';
+import { showContext } from '../contexts/ShowProvider';
 
 function AddMusic() {
-	const [state] = useContext(loginContext);
+	document.title = 'Add Artist | DumbSound';
 	const navigate = useNavigate();
+
+	const { state } = useContext(loginContext);
 	const [alert, setAlert] = useState('');
 	const [message, setMessage] = useState('');
+	const { show, setShow } = useContext(showContext);
 
 	const [types, setTypes] = useState([]);
 	const [form, setForm] = useState({
@@ -33,17 +39,6 @@ function AddMusic() {
 	}
 
 	useEffect(() => {
-		if (!state.isLogin) {
-			if (localStorage.token) {
-				setAuthToken(localStorage.token);
-				state.role === 2 && navigate('/');
-			} else {
-				navigate('/');
-			}
-		} else {
-			setAuthToken(localStorage.token);
-			state.role === 2 && navigate('/');
-		}
 		getArtist();
 	}, []);
 
@@ -63,9 +58,9 @@ function AddMusic() {
 		}
 	};
 	return (
-		<>
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
 			<Navbar className='bg-secondary shadow-sm' />
-			<Container fluid='xl' className='text-white'>
+			<Container fluid='xl' className='text-white px-4 px-0'>
 				<Row className='mt-5'>
 					<Col xs={12}>
 						<h3>Add Artist</h3>
@@ -114,7 +109,7 @@ function AddMusic() {
 							/>
 						</Form.Group>
 					</Col>
-					<Col xs={12} className='d-flex justify-content-center'>
+					<Col xs={12} className=' my-3 d-flex justify-content-center'>
 						<Form.Group>
 							<Button type='submit' className='px-5 text-white' onClick={handleSubmit}>
 								Add Artist
@@ -129,7 +124,8 @@ function AddMusic() {
 					/>
 				)}
 			</Container>
-		</>
+			{show.loading && <LoadingScreen />}
+		</motion.div>
 	);
 }
 

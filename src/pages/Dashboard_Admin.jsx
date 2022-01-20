@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Container, Dropdown, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import Navbar from '../components/Navbar';
 import DropDown from '../components/DropDown_Approve';
@@ -12,7 +13,9 @@ import { loginContext } from '../contexts/LoginProvider';
 import { API, setAuthToken } from '../config/api';
 
 function Dashboard_Admin() {
-	const [state] = useContext(loginContext);
+	document.title = 'Dashboard Admin | DumbSound';
+
+	const { state } = useContext(loginContext);
 	const navigate = useNavigate();
 	const [transaction, setTransaction] = useState([]);
 	const [preview, setPreview] = useState(false);
@@ -46,10 +49,10 @@ function Dashboard_Admin() {
 		setPreview(!preview);
 	};
 	return (
-		<>
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
 			<Navbar className='bg-secondary shadow-sm' />
 			<Container className='p-5'>
-				<Table striped bordered hover variant='dark'>
+				<Table striped bordered hover variant='dark' responsive='sm'>
 					<thead>
 						<tr className='text-primary'>
 							<th>#</th>
@@ -131,7 +134,7 @@ function Dashboard_Admin() {
 					</tbody>
 				</Table>
 			</Container>
-		</>
+		</motion.div>
 	);
 }
 

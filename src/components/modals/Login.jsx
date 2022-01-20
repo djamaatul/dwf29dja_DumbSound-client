@@ -8,13 +8,11 @@ import { loginContext } from '../../contexts/LoginProvider';
 import { showContext } from '../../contexts/ShowProvider';
 
 import Register from './Register';
-import AlertModal from './Alert';
 
 function Login(props) {
-	const [show, setShow] = useContext(showContext);
-	const [state, dispatch] = useContext(loginContext);
+	const { show, setShow } = useContext(showContext);
+	const { dispatch } = useContext(loginContext);
 
-	const [alert, setAlert] = useState('');
 	const [message, setMessage] = useState('');
 	const [form, setForm] = useState({
 		email: '',
@@ -31,10 +29,6 @@ function Login(props) {
 					payload: response.data.data,
 				});
 				setShow('signin');
-				setTimeout(() => {
-					setMessage('Success');
-					setAlert('success');
-				}, 200);
 			}
 		} catch (error) {
 			console.log(error.response);
@@ -50,8 +44,13 @@ function Login(props) {
 
 	return (
 		<>
-			<Modal show={props.show} onHide={props.hide} className='w-20' dialogClassName='modal-width'>
-				<Modal.Body className='bg-secondary'>
+			<Modal
+				show={props.show}
+				onHide={props.hide}
+				contentClassName=' bg-transparent align-items-center'
+				dialogClassName='d-flex justify-content-center mt-5 '
+			>
+				<Modal.Body className='bg-secondary rounded-3'>
 					<Form>
 						<h1 className='text-white'>Login</h1>
 						<Form.Group className='my-4' controlId='formBasicEmail'>
@@ -96,12 +95,6 @@ function Login(props) {
 				</Modal.Body>
 				<Register show={show.register} hide={() => setShow('register')} />
 			</Modal>
-			{alert && (
-				<AlertModal
-					status={alert === 'success' ? 'success' : 'danger'}
-					message={message ? message : 'failed'}
-				/>
-			)}
 		</>
 	);
 }

@@ -30,10 +30,14 @@ const reducer = (state, action) => {
 			return {
 				alertmodal: !state.alertmodal,
 			};
+		case 'loading':
+			return {
+				loading: !state.loading,
+			};
 		default:
 	}
 };
 export default function ShowProvider({ children }) {
 	const [show, setShow] = useReducer(reducer, initialState);
-	return <showContext.Provider value={[show, setShow]}>{children}</showContext.Provider>;
+	return <showContext.Provider value={{ show, setShow }}>{children}</showContext.Provider>;
 }

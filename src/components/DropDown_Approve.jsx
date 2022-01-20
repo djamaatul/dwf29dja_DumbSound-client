@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import './styles.css';
 
 import { API } from '../config/api';
@@ -50,12 +51,12 @@ function DropDown(props) {
 	return (
 		<div id={`dp${props.id}`} style={{ display: 'none' }} className='dropdown dp-approve bg-secondary font fw-bold'>
 			<ul>
-				<li className='text-success' onClick={handleApprove}>
+				<motion.li whileHover={{ scale: 1.1 }} className='text-success' onClick={handleApprove}>
 					Approve
-				</li>
-				<li className='text-primary' onClick={handleCancel}>
+				</motion.li>
+				<motion.li whileHover={{ scale: 1.1 }} className='text-primary' onClick={handleCancel}>
 					cancel
-				</li>
+				</motion.li>
 			</ul>
 			{alert && (
 				<AlertModal

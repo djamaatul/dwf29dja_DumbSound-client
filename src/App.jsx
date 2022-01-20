@@ -5,7 +5,7 @@ import { loginContext } from './contexts/LoginProvider';
 import { API, setAuthToken } from './config/api';
 
 const App = () => {
-	const [state, dispatch] = useContext(loginContext);
+	const { dispatch } = useContext(loginContext);
 	useEffect(async () => {
 		if (localStorage.token) {
 			try {
