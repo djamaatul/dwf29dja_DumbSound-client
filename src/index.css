@@ -22,9 +22,8 @@ body {
 }
 
 .jumbotron {
-	width: 100%;
 	background-image: url('./assets/bg-jumbotron.png');
-	height: 80vh;
+	height: 500px;
 	display: flex;
 	flex-direction: column;
 	text-shadow: 0px 0px 5px black;

@@ -5,14 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import AlertModal from '../components/modals/Alert';
 
-import clip from '../assets/icon/clip.svg';
-
 import { loginContext } from '../contexts/LoginProvider';
 
 import { API, setAuthToken, configJson } from '../config/api';
 
 function AddMusic() {
-	const [state, dispatch] = useContext(loginContext);
+	const [state] = useContext(loginContext);
 	const navigate = useNavigate();
 	const [alert, setAlert] = useState('');
 	const [message, setMessage] = useState('');
@@ -38,11 +36,13 @@ function AddMusic() {
 		if (!state.isLogin) {
 			if (localStorage.token) {
 				setAuthToken(localStorage.token);
+				state.role === 2 && navigate('/');
 			} else {
 				navigate('/');
 			}
 		} else {
 			setAuthToken(localStorage.token);
+			state.role === 2 && navigate('/');
 		}
 		getArtist();
 	}, []);
@@ -58,8 +58,8 @@ function AddMusic() {
 				}, 200);
 			}
 		} catch (error) {
-			console.log(error.response);
-			return setMessage(error.response.data.message);
+			setMessage(error.response.data.message);
+			return setAlert('danger');
 		}
 	};
 	return (

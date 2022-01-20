@@ -20,7 +20,7 @@ function Dashboard_Admin() {
 	const getTransaction = async () => {
 		try {
 			const response = await API.get('/transactions');
-			setTransaction(response.data.data);
+			setTransaction(response.data.data.reverse());
 		} catch (error) {
 			throw error;
 		}
@@ -28,12 +28,14 @@ function Dashboard_Admin() {
 	useEffect(() => {
 		if (!state.isLogin) {
 			if (localStorage.token) {
-				setAuthToken(localStorage.token);
+				setAuthToken(localStorage.token.reverse);
+				state.role === 2 && navigate('/');
 			} else {
 				navigate('/');
 			}
 		} else {
 			setAuthToken(localStorage.token);
+			state.role === 2 && navigate('/');
 		}
 		getTransaction();
 	}, []);
@@ -64,9 +66,10 @@ function Dashboard_Admin() {
 							return (
 								<tr key={i}>
 									<td>{i}</td>
-									<td>{e.user.fullname}</td>
+									<td style={{ textTransform: 'capitalize' }}>{e.user.fullname}</td>
 									<td>
 										<a
+											className='text-decoration-none text-white '
 											href='#'
 											onClick={(ex) => {
 												ex.preventDefault();
@@ -85,11 +88,11 @@ function Dashboard_Admin() {
 									</td>
 									<td>
 										{e.duedate && e.startdate
-											? `${
+											? `${Math.round(
 													(parseInt(new Date(e.duedate).getTime()) -
-														parseInt(new Date(e.startdate).getTime())) /
-													(1000 * 60 * 60 * 24)
-											  }/Hari`
+														parseInt(new Date().getTime())) /
+														(1000 * 60 * 60 * 24)
+											  )}/Hari`
 											: '0/Hari'}
 									</td>
 									<td>

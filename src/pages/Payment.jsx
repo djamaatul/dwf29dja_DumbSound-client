@@ -12,7 +12,7 @@ import { loginContext } from '../contexts/LoginProvider';
 import { configMulter, API, setAuthToken } from '../config/api';
 
 function Payment() {
-	const [state, dispatch] = useContext(loginContext);
+	const [state] = useContext(loginContext);
 	const navigate = useNavigate();
 	const [alert, setAlert] = useState('');
 	const [message, setMessage] = useState('');
@@ -47,8 +47,8 @@ function Payment() {
 				}, 200);
 			}
 		} catch (error) {
-			console.log(error.response);
-			return setMessage(error.response.data.message);
+			setMessage(error.response.data.message);
+			return setAlert('danger');
 		}
 	};
 	return (

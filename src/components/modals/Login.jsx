@@ -74,7 +74,7 @@ function Login(props) {
 							<Button className='full text-white' variant='primary' onClick={handleSubmit}>
 								Login
 							</Button>
-							<Form.Group className='my-4 mx-auto'>
+							<Form.Group className='my-1 mx-auto'>
 								{message && <Alert variant='danger'>{message}</Alert>}
 							</Form.Group>
 

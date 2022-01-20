@@ -5,9 +5,11 @@ const initialState = {
 	isLogin: false,
 	role: 2,
 	user: {},
+	subscribe: false,
 };
 const reducer = (state, action) => {
 	const { type, payload } = action;
+	console.log(payload);
 	switch (type) {
 		case 'RELOGIN_SUCCESS':
 		case 'LOGIN_SUCCESS':
@@ -16,6 +18,7 @@ const reducer = (state, action) => {
 				isLogin: true,
 				user: payload,
 				role: payload.role,
+				subscribe: payload.subscribe,
 			};
 		case 'RELOGIN_FAILED':
 		case 'LOGOUT':
@@ -25,6 +28,7 @@ const reducer = (state, action) => {
 				isLogin: false,
 				user: payload,
 				role: null,
+				subscribe: false,
 			};
 		default:
 	}

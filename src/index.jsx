@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './custom-bootstrap.scss';
 import './index.css';
+import 'react-jinke-music-player/assets/index.css';
 
 import ShowProvider from './contexts/ShowProvider';
 import LoginProvider from './contexts/LoginProvider';

@@ -29,6 +29,13 @@ function AddMusic() {
 	async function getArtist() {
 		try {
 			const response = await API.get('/artists');
+			if (response.status === 200) {
+				setArtists(response.data.data);
+				setTimeout(() => {
+					setMessage('Success');
+					setAlert('success');
+				}, 200);
+			}
 			setArtists(response.data.data);
 		} catch (error) {
 			throw error;
@@ -39,11 +46,13 @@ function AddMusic() {
 		if (!state.isLogin) {
 			if (localStorage.token) {
 				setAuthToken(localStorage.token);
+				state.role === 2 && navigate('/');
 			} else {
 				navigate('/');
 			}
 		} else {
 			setAuthToken(localStorage.token);
+			state.role === 2 && navigate('/');
 		}
 		getArtist();
 	}, []);
@@ -59,7 +68,6 @@ function AddMusic() {
 		formData.set('attachment', form.attachment, form.attachment.name);
 		try {
 			const response = await API.post('/music', formData, configMulter);
-			console.log(response);
 			if (response.status === 200) {
 				setTimeout(() => {
 					setMessage('Success');
@@ -67,8 +75,8 @@ function AddMusic() {
 				}, 200);
 			}
 		} catch (error) {
-			console.log(error.response);
-			return setMessage(error.response.data.message);
+			setMessage(error.response.data.message);
+			return setAlert('danger');
 		}
 	};
 	return (

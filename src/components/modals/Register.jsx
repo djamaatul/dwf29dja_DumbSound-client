@@ -102,7 +102,7 @@ function Register(props) {
 							<Button className='full' variant='primary' type='submit'>
 								Register
 							</Button>
-							<Form.Group className='my-4 mx-auto'>
+							<Form.Group className='my-1 mx-auto'>
 								{message && <Alert variant='danger'>{message}</Alert>}
 							</Form.Group>
 							<Form.Text className='text-center'>
