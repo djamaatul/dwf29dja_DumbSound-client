@@ -5,17 +5,20 @@ import { motion } from 'framer-motion';
 
 import Navbar from '../components/Navbar';
 import AlertModal from '../components/modals/Alert';
+import LoadingScreen from '../components/LoadingScreen';
 
 import clip from '../assets/icon/clip.svg';
 
 import { loginContext } from '../contexts/LoginProvider';
+import { showContext } from '../contexts/ShowProvider';
 
 import { configMulter, API, setAuthToken } from '../config/api';
 
 function AddMusic() {
 	document.title = 'AddMusic | DumbSound';
 
-	const { state, dispatch } = useContext(loginContext);
+	const { state } = useContext(loginContext);
+	const { show, setShow } = useContext(showContext);
 	const navigate = useNavigate();
 	const [alert, setAlert] = useState('');
 	const [message, setMessage] = useState('');
@@ -46,7 +49,7 @@ function AddMusic() {
 	}, []);
 
 	const handleSubmit = async (e) => {
-		console.log(form);
+		setShow('loading');
 		e.preventDefault();
 		const formData = new FormData();
 		formData.set('title', form.title);
@@ -58,9 +61,10 @@ function AddMusic() {
 			const response = await API.post('/music', formData, configMulter);
 			if (response.status === 200) {
 				setTimeout(() => {
+					setShow('loading');
 					setMessage('Success');
 					setAlert('success');
-				}, 200);
+				}, 800);
 			}
 		} catch (error) {
 			setMessage(error.response.data.message);
@@ -180,6 +184,7 @@ function AddMusic() {
 					/>
 				)}
 			</Container>
+			{show.loading == true && <LoadingScreen />}
 		</motion.div>
 	);
 }

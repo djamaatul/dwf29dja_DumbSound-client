@@ -5,16 +5,19 @@ import { motion } from 'framer-motion';
 
 import Navbar from '../components/Navbar';
 import AlertModal from '../components/modals/Alert';
+import LoadingScreen from '../components/LoadingScreen';
 
 import clip from '../assets/icon/clip.svg';
 
 import { loginContext } from '../contexts/LoginProvider';
+import { showContext } from '../contexts/ShowProvider';
 import { configMulter, API, setAuthToken } from '../config/api';
 
 function Payment() {
 	document.title = 'Payment | DumbSound';
 
 	const { state } = useContext(loginContext);
+	const { show, setShow } = useContext(showContext);
 	const navigate = useNavigate();
 	const [alert, setAlert] = useState('');
 	const [message, setMessage] = useState('');
@@ -23,8 +26,13 @@ function Payment() {
 		attachment: '',
 	});
 
+	useEffect(() => {
+		setAuthToken(localStorage.token);
+	}, []);
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setShow('loading');
 		const formData = new FormData();
 		formData.set('accountnumber', form.accountnumber);
 		formData.set('attachment', form.attachment, form.attachment.name);
@@ -32,9 +40,10 @@ function Payment() {
 			const response = await API.post('/transaction', formData, configMulter);
 			if (response.status === 200) {
 				setTimeout(() => {
+					setShow('loading');
 					setMessage('Success');
 					setAlert('success');
-				}, 200);
+				}, 800);
 			}
 		} catch (error) {
 			setMessage(error.response.data.message);
@@ -102,13 +111,14 @@ function Payment() {
 						</Form>
 					</Col>
 				</Row>
-				{alert && (
-					<AlertModal
-						status={alert === 'success' ? 'success' : 'danger'}
-						message={message ? message : 'failed'}
-					/>
-				)}
 			</Container>
+			{alert && (
+				<AlertModal
+					status={alert === 'success' ? 'success' : 'danger'}
+					message={message ? message : 'failed'}
+				/>
+			)}
+			{show.loading && <LoadingScreen />}
 		</motion.div>
 	);
 }

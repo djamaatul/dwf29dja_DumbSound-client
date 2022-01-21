@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import './styles.css';
 
@@ -6,17 +6,23 @@ import { API } from '../config/api';
 
 import AlertModal from './modals/Alert';
 
+import { showContext } from '../contexts/ShowProvider';
+
 function DropDown(props) {
+	const { show, setShow } = useContext(showContext);
 	const [alert, setAlert] = useState('');
 	const [message, setMessage] = useState('');
+
 	const approve = async () => {
+		setShow('loading');
 		try {
 			const response = await API.patch(`/transaction/${props.id}`, { status: 'success' });
 			setTimeout(() => {
+				setShow('loading');
 				setMessage(response.data.message);
 				setAlert('success');
 				props.update();
-			}, 200);
+			}, 800);
 		} catch (error) {
 			setTimeout(() => {
 				setMessage(error.response.data.message);
@@ -28,8 +34,10 @@ function DropDown(props) {
 
 	const cancel = async () => {
 		try {
+			setShow('loading');
 			const response = await API.patch(`/transaction/${props.id}`, { status: 'cancel' });
 			setTimeout(() => {
+				setShow('loading');
 				setMessage(response.data.message);
 				setAlert('success');
 				props.update();

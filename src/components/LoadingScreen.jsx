@@ -3,10 +3,10 @@ import React from 'react';
 function Loading() {
 	return (
 		<div
-			className='position-absolute end-0 start-0 top-0 bottom-0 d d-flex justify-content-center align-items-center'
-			style={{ background: 'rgba(0,0,0,0.1)' }}
+			className='position-fixed d-flex justify-content-center align-items-center'
+			style={{ backgroundColor: 'rgba(0,0,0,0.9)', width: '100vw', height: '100%', zIndex: 99999 }}
 		>
-			<div class='lds-ripple'>
+			<div className='lds-ripple'>
 				<div></div>
 				<div></div>
 			</div>

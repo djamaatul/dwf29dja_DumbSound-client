@@ -6,16 +6,19 @@ import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import DropDown from '../components/DropDown_Approve';
 import PreviewImage from '../components/modals/PreviewImage';
+import LoadingScreen from '../components/LoadingScreen';
 
 import triangle from '../assets/icon/triangle.svg';
 
 import { loginContext } from '../contexts/LoginProvider';
 import { API, setAuthToken } from '../config/api';
+import { showContext } from '../contexts/ShowProvider';
 
 function Dashboard_Admin() {
 	document.title = 'Dashboard Admin | DumbSound';
 
 	const { state } = useContext(loginContext);
+	const { show } = useContext(showContext);
 	const navigate = useNavigate();
 	const [transaction, setTransaction] = useState([]);
 	const [preview, setPreview] = useState(false);
@@ -51,6 +54,7 @@ function Dashboard_Admin() {
 	return (
 		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
 			<Navbar className='bg-secondary shadow-sm' />
+			{show.loading && <LoadingScreen />}
 			<Container className='p-5'>
 				<Table striped bordered hover variant='dark' responsive='sm'>
 					<thead>

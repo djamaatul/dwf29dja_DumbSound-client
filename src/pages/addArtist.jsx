@@ -43,14 +43,16 @@ function AddMusic() {
 	}, []);
 
 	const handleSubmit = async (e) => {
-		e.preventDefault();
 		try {
+			e.preventDefault();
+			setShow('loading');
 			const response = await API.post('/artist', form, configJson);
 			if (response.status === 200) {
 				setTimeout(() => {
+					setShow('loading');
 					setMessage('Success');
 					setAlert('success');
-				}, 200);
+				}, 800);
 			}
 		} catch (error) {
 			setMessage(error.response.data.message);
@@ -124,7 +126,7 @@ function AddMusic() {
 					/>
 				)}
 			</Container>
-			{show.loading && <LoadingScreen />}
+			{show.loading == true && <LoadingScreen />}
 		</motion.div>
 	);
 }

@@ -16,15 +16,6 @@ function DropDown(props) {
 	const { state, dispatch } = useContext(loginContext);
 	const { setShow } = useContext(showContext);
 
-	const variants = {
-		open: {
-			transition: { staggerChildren: 0.07, delayChildren: 0.2 },
-		},
-		closed: {
-			transition: { staggerChildren: 0.05, staggerDirection: -1 },
-		},
-	};
-
 	return (
 		<motion.div
 			animate={{ scale: props.show ? [0, 1.1, 1] : 0 }}

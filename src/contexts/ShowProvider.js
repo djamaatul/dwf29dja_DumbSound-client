@@ -7,6 +7,8 @@ const initialState = {
 	dropdown: false,
 	approvemodal: false,
 	alertmodal: false,
+	loading: false,
+	approve: false,
 };
 const reducer = (state, action) => {
 	switch (action) {
@@ -33,6 +35,10 @@ const reducer = (state, action) => {
 		case 'loading':
 			return {
 				loading: !state.loading,
+			};
+		case 'approve':
+			return {
+				approve: !state.approve,
 			};
 		default:
 	}

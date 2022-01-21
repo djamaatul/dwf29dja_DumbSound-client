@@ -11,7 +11,7 @@ import Register from './Register';
 
 function Login(props) {
 	const { show, setShow } = useContext(showContext);
-	const { dispatch } = useContext(loginContext);
+	const { state, dispatch } = useContext(loginContext);
 
 	const [message, setMessage] = useState('');
 	const [form, setForm] = useState({
@@ -47,7 +47,7 @@ function Login(props) {
 			<Modal
 				show={props.show}
 				onHide={props.hide}
-				contentClassName=' bg-transparent align-items-center'
+				contentClassName='w-50 bg-transparent'
 				dialogClassName='d-flex justify-content-center mt-5 '
 			>
 				<Modal.Body className='bg-secondary rounded-3'>

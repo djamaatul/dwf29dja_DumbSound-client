@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Card, Button, Col, Row } from 'react-bootstrap';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { Card, Col, Row } from 'react-bootstrap';
 
 function Cards(props) {
 	return (
@@ -18,7 +16,7 @@ function Cards(props) {
 			</div>
 			<Card.Footer style={{ borderTop: 0 }} className='text-white'>
 				<Row>
-					<Col xs={8} className=''>
+					<Col xs={10} className=''>
 						<Row>
 							<Col xs={12}>
 								<h5>{props.artist.slice(0, 15)}</h5>
@@ -28,7 +26,7 @@ function Cards(props) {
 							</Col>
 						</Row>
 					</Col>
-					<Col xs={4} className='d-flex justify-content-end'>
+					<Col xs={2} className='d-flex justify-content-end'>
 						<p>{props?.year}</p>
 					</Col>
 				</Row>
