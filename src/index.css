@@ -31,3 +31,27 @@ body {
 	background-color: #3a3a3a;
 	background-repeat: no-repeat;
 }
+.react-jinke-music-player-main .music-player-panel {
+	background-color: #161616 !important;
+}
+.progress-bar {
+	background-color: unset;
+}
+.rc-slider-track,
+.rc-slider-handle {
+	background-color: #ee4622 !important;
+}
+.audio-lists-btn,
+.hide-panel {
+	display: none !important;
+}
+.music-player-panel {
+	padding: 15px;
+}
+.react-jinke-music-player-main svg:hover,
+.react-jinke-music-player-main svg:active {
+	color: #ee4622 !important;
+}
+.react-jinke-music-player-main .music-player-panel .panel-content .progress-bar-content .progress-bar {
+	overflow: unset;
+}

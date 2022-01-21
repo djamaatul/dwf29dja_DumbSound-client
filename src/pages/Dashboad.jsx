@@ -56,6 +56,7 @@ function Dashboad() {
 					<ReactJkMusicPlayer
 						audioLists={state.subscribe == true ? audioLists : []}
 						autoPlay={false}
+						remove={false}
 						showDownload={false}
 						defaultVolume={0.5}
 						showThemeSwitch={false}
@@ -97,7 +98,7 @@ function Dashboad() {
 					</Col>
 					{music?.map((e, i) => {
 						return (
-							<Col xs={6} md={2} key={i}>
+							<Col xs={6} sm={4} md={3} lg={2} key={i}>
 								<motion.div
 									whileHover={{ scale: 1.1 }}
 									style={{ cursor: 'pointer', borderRadius: 20 }}
