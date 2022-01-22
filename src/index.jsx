@@ -9,6 +9,7 @@ import 'react-jinke-music-player/assets/index.css';
 
 import ShowProvider from './contexts/ShowProvider';
 import LoginProvider from './contexts/LoginProvider';
+import AdminRoute from './components/AdminRoute';
 
 import App from '../src/App';
 
@@ -22,9 +23,11 @@ ReactDOM.render(
 					<Routes>
 						<Route path='/' element={<App />}>
 							<Route index element={<Dashboard />} />
-							<Route path='/addartist' element={<AddArtist />} />
-							<Route path='/addmusic' element={<AddMusic />} />
 							<Route path='payment' element={<Payment />} />
+							<Route element={<AdminRoute />}>
+								<Route path='/addartist' element={<AddArtist />} />
+								<Route path='/addmusic' element={<AddMusic />} />
+							</Route>
 						</Route>
 						<Route path='*' element={<div>page 404</div>} />
 					</Routes>

@@ -53,8 +53,8 @@ function Dashboard_Admin() {
 	};
 	return (
 		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-			<Navbar className='bg-secondary shadow-sm' />
 			{show.loading && <LoadingScreen />}
+			<Navbar className='bg-secondary shadow-sm' />
 			<Container className='p-5'>
 				<Table striped bordered hover variant='dark' responsive='sm'>
 					<thead>

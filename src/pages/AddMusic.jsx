@@ -72,120 +72,125 @@ function AddMusic() {
 		}
 	};
 	return (
-		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-			<Navbar className='bg-secondary shadow-sm' />
-			<Container fluid='xl' className='text-white px-4 px-0'>
-				<Row className='mt-5'>
-					<Col xs={12}>
-						<h3>Add Music</h3>
-					</Col>
-					<Col md={8} xs={12}>
-						<Form.Group className='my-3'>
-							<Form.Control
-								style={{ backgroundColor: '#D2D2D240', color: 'white' }}
-								onChange={(e) => setForm({ ...form, title: e.target.value })}
-								type='text'
-								placeholder='Title'
-							/>
-						</Form.Group>
-					</Col>
-					<Col md={4}>
-						<Form.Group className='my-3 position-relative'>
-							<Button
-								variant='light'
-								className=' d-flex w-100 justify-content-between'
-								style={{
-									backgroundColor: '#D2D2D240',
-									color: 'grey',
-									border: '1px solid white',
-								}}
+		<>
+			<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+				{show.loading == true && <LoadingScreen />}
+				<Navbar className='bg-secondary shadow-sm' />
+				<Container fluid='xl' className='text-white px-4 px-0'>
+					<Row className='mt-5'>
+						<Col xs={12}>
+							<h3>Add Music</h3>
+						</Col>
+						<Col md={8} xs={12}>
+							<Form.Group className='my-3'>
+								<Form.Control
+									style={{ backgroundColor: '#D2D2D240', color: 'white' }}
+									onChange={(e) => setForm({ ...form, title: e.target.value })}
+									type='text'
+									placeholder='Title'
+								/>
+							</Form.Group>
+						</Col>
+						<Col md={4}>
+							<Form.Group className='my-3 position-relative'>
+								<Button
+									variant='light'
+									className=' d-flex w-100 justify-content-between'
+									style={{
+										backgroundColor: '#D2D2D240',
+										color: 'grey',
+										border: '1px solid white',
+									}}
+								>
+									Attach thumbnail <img src={clip} width={15} alt='' />
+								</Button>
+								<Form.Control
+									className='position-absolute top-0 w-100'
+									style={{ opacity: '0%' }}
+									type='file'
+									onChange={(e) => {
+										if (e.target.files[0].type.match(/^image\/.*/)) {
+											setForm({ ...form, thumbnail: e.target.files[0] });
+										} else {
+											document.getElementById('preview').removeAttribute('src');
+											e.target.files = null;
+										}
+									}}
+								/>
+							</Form.Group>
+						</Col>
+						<Col xs={12}>
+							<Form.Group className='my-3'>
+								<Form.Control
+									style={{ backgroundColor: '#D2D2D240', color: 'white' }}
+									onChange={(e) => setForm({ ...form, year: e.target.value })}
+									type='text'
+									placeholder='Year'
+								/>
+							</Form.Group>
+						</Col>
+						<Col xs={12}>
+							<Form.Group
+								className='my-4'
+								onChange={(e) => setForm({ ...form, artistid: e.target.value })}
 							>
-								Attach thumbnail <img src={clip} width={15} alt='' />
-							</Button>
-							<Form.Control
-								className='position-absolute top-0 w-100'
-								style={{ opacity: '0%' }}
-								type='file'
-								onChange={(e) => {
-									if (e.target.files[0].type.match(/^image\/.*/)) {
-										setForm({ ...form, thumbnail: e.target.files[0] });
-									} else {
-										document.getElementById('preview').removeAttribute('src');
-										e.target.files = null;
-									}
-								}}
-							/>
-						</Form.Group>
-					</Col>
-					<Col xs={12}>
-						<Form.Group className='my-3'>
-							<Form.Control
-								style={{ backgroundColor: '#D2D2D240', color: 'white' }}
-								onChange={(e) => setForm({ ...form, year: e.target.value })}
-								type='text'
-								placeholder='Year'
-							/>
-						</Form.Group>
-					</Col>
-					<Col xs={12}>
-						<Form.Group className='my-4' onChange={(e) => setForm({ ...form, artistid: e.target.value })}>
-							<Form.Select style={{ backgroundColor: '#D2D2D240', color: 'white' }}>
-								<option>Artist</option>
-								{artists?.map((e, i) => {
-									return (
-										<option key={e.id} value={e.id}>
-											{e.name}
-										</option>
-									);
-								})}
-							</Form.Select>
-						</Form.Group>
-					</Col>
-					<Col md={4}>
-						<Form.Group className='my-3 position-relative'>
-							<Button
-								variant='light'
-								className=' d-flex justify-content-between'
-								style={{
-									backgroundColor: '#D2D2D240',
-									color: 'grey',
-									border: '1px solid white',
-								}}
-							>
-								Attach
-							</Button>
-							<Form.Control
-								className='position-absolute top-0'
-								style={{ opacity: '0%', width: 75 }}
-								type='file'
-								onChange={(e) => {
-									if (e.target.files[0].type.match(/^audio\/.*/)) {
-										setForm({ ...form, attachment: e.target.files[0] });
-									} else {
-										document.getElementById('preview').removeAttribute('src');
-										e.target.files = null;
-									}
-								}}
-							/>
-						</Form.Group>
-					</Col>
-					<Col xs={12} className='d-flex justify-content-center'>
-						<Form.Group>
-							<Button type='submit' className='px-5 text-white' onClick={handleSubmit}>
-								Add Song
-							</Button>
-						</Form.Group>
-					</Col>
-				</Row>
-				{alert && (
-					<AlertModal
-						status={alert === 'success' ? 'success' : 'danger'}
-						message={message ? message : 'failed'}
-					/>
-				)}
-			</Container>
-			{show.loading == true && <LoadingScreen />}
-		</motion.div>
+								<Form.Select style={{ backgroundColor: '#D2D2D240', color: 'white' }}>
+									<option>Artist</option>
+									{artists?.map((e, i) => {
+										return (
+											<option key={e.id} value={e.id}>
+												{e.name}
+											</option>
+										);
+									})}
+								</Form.Select>
+							</Form.Group>
+						</Col>
+						<Col md={4}>
+							<Form.Group className='my-3 position-relative'>
+								<Button
+									variant='light'
+									className=' d-flex justify-content-between'
+									style={{
+										backgroundColor: '#D2D2D240',
+										color: 'grey',
+										border: '1px solid white',
+									}}
+								>
+									Attach
+								</Button>
+								<Form.Control
+									className='position-absolute top-0'
+									style={{ opacity: '0%', width: 75 }}
+									type='file'
+									onChange={(e) => {
+										if (e.target.files[0].type.match(/^audio\/.*/)) {
+											setForm({ ...form, attachment: e.target.files[0] });
+										} else {
+											document.getElementById('preview').removeAttribute('src');
+											e.target.files = null;
+										}
+									}}
+								/>
+							</Form.Group>
+						</Col>
+						<Col xs={12} className='d-flex justify-content-center'>
+							<Form.Group>
+								<Button type='submit' className='px-5 text-white' onClick={handleSubmit}>
+									Add Song
+								</Button>
+							</Form.Group>
+						</Col>
+					</Row>
+				</Container>
+			</motion.div>
+			{alert && (
+				<AlertModal
+					status={alert === 'success' ? 'success' : 'danger'}
+					message={message ? message : 'failed'}
+				/>
+			)}
+		</>
 	);
 }
 

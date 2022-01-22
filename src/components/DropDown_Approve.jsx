@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './styles.css';
 
@@ -56,6 +56,11 @@ function DropDown(props) {
 	const handleCancel = () => {
 		cancel();
 	};
+	useEffect(() => {
+		return () => {
+			setAlert('');
+		};
+	}, [show]);
 	return (
 		<div id={`dp${props.id}`} style={{ display: 'none' }} className='dropdown dp-approve bg-secondary font fw-bold'>
 			<ul>
