@@ -1,3 +1,4 @@
+import nprogress from 'nprogress';
 import React, { useState, useContext, useEffect } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -20,6 +21,7 @@ function Login(props) {
 	});
 
 	const handleSubmit = async (e) => {
+		nprogress.start();
 		try {
 			e.preventDefault();
 			const response = await API.post('/login', JSON.stringify(form), configJson);
@@ -29,6 +31,7 @@ function Login(props) {
 					payload: response.data.data,
 				});
 				setShow('signin');
+				nprogress.done();
 			}
 		} catch (error) {
 			console.log(error.response);

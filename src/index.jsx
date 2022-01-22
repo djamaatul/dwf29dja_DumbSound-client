@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './custom-bootstrap.scss';
 import './index.css';
 import 'react-jinke-music-player/assets/index.css';
+import './nprogress.css';
 
 import ShowProvider from './contexts/ShowProvider';
 import LoginProvider from './contexts/LoginProvider';

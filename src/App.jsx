@@ -1,11 +1,14 @@
 import React, { useContext, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import { loginContext } from './contexts/LoginProvider';
 import { API, setAuthToken } from './config/api';
+import nprogress from 'nprogress';
 
 const App = () => {
+	const location = useLocation();
 	const { dispatch } = useContext(loginContext);
+
 	useEffect(async () => {
 		if (localStorage.token) {
 			try {
@@ -31,6 +34,12 @@ const App = () => {
 			});
 		}
 	}, []);
+	useEffect(() => {
+		nprogress.start();
+		setTimeout(() => {
+			nprogress.done();
+		}, 1000);
+	}, [location]);
 	return (
 		<>
 			<Outlet />
