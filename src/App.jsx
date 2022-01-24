@@ -36,9 +36,7 @@ const App = () => {
 	}, []);
 	useEffect(() => {
 		nprogress.start();
-		setTimeout(() => {
-			nprogress.done();
-		}, 1000);
+		nprogress.done();
 	}, [location]);
 	return (
 		<>
