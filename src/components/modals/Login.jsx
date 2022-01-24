@@ -1,7 +1,7 @@
 import nprogress from 'nprogress';
 import React, { useState, useContext, useEffect } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { API, configJson } from '../../config/api';
 
@@ -11,6 +11,7 @@ import { showContext } from '../../contexts/ShowProvider';
 import Register from './Register';
 
 function Login(props) {
+	const navigate = useNavigate();
 	const { show, setShow } = useContext(showContext);
 	const { state, dispatch } = useContext(loginContext);
 
@@ -31,6 +32,9 @@ function Login(props) {
 					payload: response.data.data,
 				});
 				setShow('signin');
+				if (response.data.data.role == 1) {
+					navigate('/admin');
+				}
 				nprogress.done();
 			}
 		} catch (error) {

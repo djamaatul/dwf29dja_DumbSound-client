@@ -14,7 +14,7 @@ import AdminRoute from './components/AdminRoute';
 
 import App from '../src/App';
 
-import { Dashboard, AddMusic, AddArtist, Payment } from '../src/pages';
+import { Dashboard, AddMusic, AddArtist, Payment, Dashboard_Admin } from '../src/pages';
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -24,7 +24,8 @@ ReactDOM.render(
 					<Routes>
 						<Route path='/' element={<App />}>
 							<Route index element={<Dashboard />} />
-							<Route path='payment' element={<Payment />} />
+							<Route path='/admin' element={<Dashboard_Admin />} />
+							<Route path='/payment' element={<Payment />} />
 							<Route element={<AdminRoute />}>
 								<Route path='/addartist' element={<AddArtist />} />
 								<Route path='/addmusic' element={<AddMusic />} />

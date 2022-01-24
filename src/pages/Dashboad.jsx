@@ -11,7 +11,6 @@ import { API } from '../config/api';
 
 import { loginContext } from '../contexts/LoginProvider';
 import { showContext } from '../contexts/ShowProvider';
-import Dashboard_Admin from './Dashboard_Admin';
 
 function Dashboad() {
 	document.title = 'Dashboard | DumbSound';
@@ -46,9 +45,6 @@ function Dashboad() {
 	useEffect(() => {
 		getMusics();
 	}, []);
-	if (state.role === 1) {
-		return <Dashboard_Admin />;
-	}
 	return (
 		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
 			<Container fluid='xxl' className='position-relative p-0 pb-5'>

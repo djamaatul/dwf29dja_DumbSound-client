@@ -42,7 +42,7 @@ function Payment() {
 					setShow('loading');
 					setMessage('Success');
 					setAlert('success');
-				}, 800);
+				}, 300);
 			}
 		} catch (error) {
 			setMessage(error.response.data.message);
