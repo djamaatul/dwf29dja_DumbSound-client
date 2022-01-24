@@ -25,7 +25,10 @@ function Header(props) {
 			<Navbar collapseOnSelect {...props}>
 				<Container fluid='xxl'>
 					<Navbar.Brand className='ms-md-5'>
-						<Link to='/' className='text-decoration-none d-flex align-items-center'>
+						<Link
+							to={state.role == 2 ? '/' : '/admin'}
+							className='text-decoration-none d-flex align-items-center'
+						>
 							<img src={logo} width='30' height='30' className='d-inline-block align-top' alt='Logo' />
 							<h4 className='ms-3 p-0 my-0'>
 								<span className='text-primary'>DUMB</span>

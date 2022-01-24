@@ -14,6 +14,7 @@ import { showContext } from '../contexts/ShowProvider';
 
 function AddMusic() {
 	document.title = 'Add Artist | DumbSound';
+	const navigate = useNavigate();
 	const { state } = useContext(loginContext);
 	const { show, setShow } = useContext(showContext);
 	const [alert, setAlert] = useState('');
@@ -37,7 +38,15 @@ function AddMusic() {
 	}
 
 	useEffect(() => {
-		getArtist();
+		if (!state.isLogin) {
+			console.log(state.role);
+			if (!localStorage.token || state.role !== 1) {
+				navigate('/');
+			}
+			getArtist();
+		} else {
+			setAuthToken(localStorage.token);
+		}
 	}, []);
 
 	const handleSubmit = async (e) => {

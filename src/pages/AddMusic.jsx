@@ -45,7 +45,14 @@ function AddMusic() {
 	}
 
 	useEffect(() => {
-		getArtist();
+		if (!state.isLogin) {
+			if (!localStorage.token || state.role !== 1) {
+				navigate('/');
+			}
+			getArtist();
+		} else {
+			setAuthToken(localStorage.token);
+		}
 	}, []);
 
 	const handleSubmit = async (e) => {

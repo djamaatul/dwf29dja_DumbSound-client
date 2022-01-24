@@ -18,8 +18,8 @@ function Dashboad() {
 	const { state } = useContext(loginContext);
 	const { show, setShow } = useContext(showContext);
 	const [music, setMusic] = useState([]);
-	const [audioLists, setAudioLists] = useState([]);
 	const navigate = useNavigate();
+	const [audioLists, setAudioLists] = useState([]);
 	let [audioInstance, SetAudioInstance] = useState(() => {});
 
 	async function getMusics() {
@@ -48,7 +48,7 @@ function Dashboad() {
 	return (
 		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
 			<Container fluid='xxl' className='position-relative p-0 pb-5'>
-				{state.isLogin == true && state.subscribe == true && (
+				{((state.isLogin == true && state.subscribe == true) || state.role == 1) && (
 					<ReactJkMusicPlayer
 						audioLists={state.subscribe == true ? audioLists : []}
 						autoPlay={false}
@@ -101,7 +101,7 @@ function Dashboad() {
 									onClick={() => {
 										state.subscribe == true
 											? audioInstance.playByIndex(i)
-											: state.isLogin == true
+											: state.subscribe == false && state.isLogin == true
 											? navigate('/payment')
 											: setShow('signin');
 									}}

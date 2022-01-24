@@ -3,7 +3,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 
 function Cards(props) {
 	return (
-		<Card style={{ maxHeight: 300, borderRadius: 10, backgroundColor: '#3A3A3A', minHeight: 320 }} className='my-3'>
+		<Card style={{ maxHeight: 330, borderRadius: 10, backgroundColor: '#3A3A3A', minHeight: 320 }} className='my-3'>
 			<div style={{ padding: 10 }}>
 				<div
 					style={{
@@ -26,7 +26,7 @@ function Cards(props) {
 							</Col>
 						</Row>
 					</Col>
-					<Col xs={12} sm={6} md={3} className='d-flex justify-content-end'>
+					<Col xs={12} sm={6} md={3} className='d-flex justify-content-start justify-content-md-end'>
 						<p>{props?.year}</p>
 					</Col>
 				</Row>

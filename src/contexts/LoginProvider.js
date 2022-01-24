@@ -6,6 +6,7 @@ const initialState = {
 	role: 2,
 	user: {},
 	subscribe: false,
+	ispending: false,
 };
 const reducer = (state, action) => {
 	const { type, payload } = action;
@@ -19,6 +20,7 @@ const reducer = (state, action) => {
 				user: payload,
 				role: payload.role,
 				subscribe: payload.subscribe,
+				ispending: payload.ispending,
 			};
 		case 'RELOGIN_FAILED':
 		case 'LOGOUT':
