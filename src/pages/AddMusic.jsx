@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import nprogress from 'nprogress';
 
 import Navbar from '../components/Navbar';
 import AlertModal from '../components/modals/Alert';
@@ -37,8 +38,8 @@ function AddMusic() {
 			const response = await API.get('/artists');
 			if (response.status === 200) {
 				setArtists(response.data.data);
+				nprogress.done();
 			}
-			setArtists(response.data.data);
 		} catch (error) {
 			throw error;
 		}
@@ -46,12 +47,13 @@ function AddMusic() {
 
 	useEffect(() => {
 		if (!state.isLogin) {
-			if (!localStorage.token || state.role !== 1) {
+			if (!localStorage.token && state.role !== 1) {
 				navigate('/');
 			}
 			getArtist();
 		} else {
 			setAuthToken(localStorage.token);
+			getArtist();
 		}
 	}, []);
 

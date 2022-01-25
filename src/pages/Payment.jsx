@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import nProgress from 'nprogress';
 
 import Navbar from '../components/Navbar';
 import AlertModal from '../components/modals/Alert';
@@ -15,7 +16,6 @@ import { configMulter, API, setAuthToken } from '../config/api';
 
 function Payment() {
 	document.title = 'Payment | DumbSound';
-
 	const { show, setShow } = useContext(showContext);
 	const { state } = useContext(loginContext);
 	const navigate = useNavigate();
@@ -35,6 +35,7 @@ function Payment() {
 			setAuthToken(localStorage.token);
 		}
 	}, []);
+	nProgress.done();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();

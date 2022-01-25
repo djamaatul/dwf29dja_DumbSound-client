@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import ReactJkMusicPlayer from 'react-jinke-music-player';
 import { motion } from 'framer-motion';
+import nprogress from 'nprogress';
 
 import Navbar from '../components/Navbar';
 import Card from '../components/Card';
@@ -38,6 +39,7 @@ function Dashboad() {
 					};
 				})
 			);
+			nprogress.done();
 		} catch (error) {
 			throw error;
 		}

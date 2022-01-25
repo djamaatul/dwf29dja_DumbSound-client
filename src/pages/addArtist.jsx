@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import AlertModal from '../components/modals/Alert';
 import LoadingScreen from '../components/LoadingScreen';
+import nprogress from 'nprogress';
 
 import { loginContext } from '../contexts/LoginProvider';
 
@@ -32,6 +33,7 @@ function AddMusic() {
 		try {
 			const response = await API.get('/type_artists');
 			setTypes(response.data.data);
+			nprogress.done();
 		} catch (error) {
 			throw error;
 		}
@@ -40,12 +42,13 @@ function AddMusic() {
 	useEffect(() => {
 		if (!state.isLogin) {
 			console.log(state.role);
-			if (!localStorage.token || state.role !== 1) {
+			if (!localStorage.token && state.role !== 1) {
 				navigate('/');
 			}
 			getArtist();
 		} else {
 			setAuthToken(localStorage.token);
+			getArtist();
 		}
 	}, []);
 

@@ -36,7 +36,6 @@ const App = () => {
 	}, []);
 	useEffect(() => {
 		nprogress.start();
-		nprogress.done();
 	}, [location]);
 	return (
 		<>
