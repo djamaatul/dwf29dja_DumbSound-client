@@ -42,7 +42,7 @@ function AddMusic() {
 	useEffect(() => {
 		if (!state.isLogin) {
 			console.log(state.role);
-			if (!localStorage.token && state.role !== 1) {
+			if (!localStorage.token) {
 				navigate('/');
 			}
 			getArtist();

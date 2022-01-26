@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Container, Dropdown, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import nProgress from 'nprogress';
+import nprogress from 'nprogress';
 
 import Navbar from '../components/Navbar';
 import DropDown from '../components/DropDown_Approve';
@@ -28,7 +28,7 @@ function Dashboard_Admin() {
 		try {
 			const response = await API.get('/transactions');
 			setTransaction(response.data.data.reverse());
-			nProgress.done();
+			nprogress.done();
 		} catch (error) {
 			throw error;
 		}
@@ -36,8 +36,7 @@ function Dashboard_Admin() {
 	useEffect(() => {
 		if (!state.isLogin) {
 			if (localStorage.token) {
-				setAuthToken(localStorage.token.reverse);
-				state.role === 2 && navigate('/');
+				setAuthToken(localStorage.token);
 			} else {
 				navigate('/');
 			}

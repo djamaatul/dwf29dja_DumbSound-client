@@ -4,7 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 function AdminRoute() {
 	const { state } = useContext(loginContext);
-	if (state.role !== 1 && state.islogin == true) {
+	if (state.role !== 1 || state.islogin == true) {
 		return <Navigate to='/' />;
 	} else {
 		return <Outlet />;

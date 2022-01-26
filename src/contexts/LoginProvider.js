@@ -3,7 +3,7 @@ import React, { createContext, useReducer } from 'react';
 export const loginContext = createContext();
 const initialState = {
 	isLogin: false,
-	role: 2,
+	role: 1,
 	user: {},
 	subscribe: false,
 	ispending: false,

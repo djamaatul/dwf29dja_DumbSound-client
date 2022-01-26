@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Container, Col, Row, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import nProgress from 'nprogress';
+import nprogress from 'nprogress';
 
 import Navbar from '../components/Navbar';
 import AlertModal from '../components/modals/Alert';
@@ -34,8 +34,8 @@ function Payment() {
 		} else {
 			setAuthToken(localStorage.token);
 		}
+		nprogress.done();
 	}, []);
-	nProgress.done();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
