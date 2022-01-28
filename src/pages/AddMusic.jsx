@@ -14,6 +14,7 @@ import { loginContext } from '../contexts/LoginProvider';
 import { showContext } from '../contexts/ShowProvider';
 
 import { configMulter, API, setAuthToken } from '../config/api';
+import MusicList from '../components/MusicList';
 
 function AddMusic() {
 	document.title = 'AddMusic | DumbSound';
@@ -23,6 +24,7 @@ function AddMusic() {
 	const navigate = useNavigate();
 	const [alert, setAlert] = useState('');
 	const [message, setMessage] = useState('');
+	const [music, setMusic] = useState([]);
 
 	const [artists, setArtists] = useState([]);
 	const [form, setForm] = useState({
@@ -44,16 +46,25 @@ function AddMusic() {
 			throw error;
 		}
 	}
-
+	async function getMusics() {
+		try {
+			const response = await API.get('/musics');
+			setMusic(response.data.data);
+		} catch (error) {
+			throw error;
+		}
+	}
 	useEffect(() => {
 		if (!state.isLogin) {
 			if (!localStorage.token && state.role !== 1) {
 				navigate('/');
 			}
 			getArtist();
+			getMusics();
 		} else {
 			setAuthToken(localStorage.token);
 			getArtist();
+			getMusics();
 		}
 	}, []);
 
@@ -74,6 +85,7 @@ function AddMusic() {
 					setMessage('Success');
 					setAlert('success');
 				}, 300);
+				getMusics();
 			}
 		} catch (error) {
 			setMessage(error.response.data.message);
@@ -189,6 +201,25 @@ function AddMusic() {
 									Add Song
 								</Button>
 							</Form.Group>
+						</Col>
+					</Row>
+					<hr />
+					<Row className='my-5'>
+						<Col xs={12}>
+							<div>
+								{music?.map((e) => {
+									return (
+										<MusicList
+											update={getMusics}
+											key={e.id}
+											id={e.id}
+											thumbnail={e.thumbnail}
+											title={e.title}
+											artist={e.artist.name}
+										/>
+									);
+								})}
+							</div>
 						</Col>
 					</Row>
 				</Container>

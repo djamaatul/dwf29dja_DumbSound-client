@@ -52,7 +52,7 @@ function Dashboad() {
 			<Container fluid='xxl' className='position-relative p-0 pb-5'>
 				{((state.isLogin == true && state.subscribe == true) || state.role == 1) && (
 					<ReactJkMusicPlayer
-						audioLists={state.subscribe == true ? audioLists : []}
+						audioLists={state.subscribe == true || state.role == 1 ? audioLists : []}
 						autoPlay={false}
 						remove={false}
 						showDownload={false}
@@ -101,7 +101,7 @@ function Dashboad() {
 									whileHover={{ scale: 1.1 }}
 									style={{ cursor: 'pointer', borderRadius: 20 }}
 									onClick={() => {
-										state.subscribe == true
+										state.subscribe == true || state.role == 1
 											? audioInstance.playByIndex(i)
 											: state.subscribe == false && state.isLogin == true
 											? navigate('/payment')
