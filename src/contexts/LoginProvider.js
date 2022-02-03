@@ -22,6 +22,11 @@ const reducer = (state, action) => {
 				subscribe: payload.subscribe,
 				ispending: payload.ispending,
 			};
+		case 'PAYMENT_SUCCESS':
+			return {
+				...state,
+				ispending: true,
+			};
 		case 'RELOGIN_FAILED':
 		case 'LOGOUT':
 		case 'LOGIN_FAILED':

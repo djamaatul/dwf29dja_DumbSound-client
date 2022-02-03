@@ -17,7 +17,7 @@ import { configMulter, API, setAuthToken } from '../config/api';
 function Payment() {
 	document.title = 'Payment | DumbSound';
 	const { show, setShow } = useContext(showContext);
-	const { state } = useContext(loginContext);
+	const { state, dispatch } = useContext(loginContext);
 	const navigate = useNavigate();
 	const [alert, setAlert] = useState('');
 	const [message, setMessage] = useState('');
@@ -50,9 +50,7 @@ function Payment() {
 					setShow('loading');
 					setMessage('Success');
 					setAlert('success');
-					setTimeout(() => {
-						window.location.reload();
-					}, 1000);
+					dispatch('PAYMENT_SUCCESS');
 				}, 300);
 			}
 		} catch (error) {
