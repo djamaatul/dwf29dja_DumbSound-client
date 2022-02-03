@@ -50,8 +50,8 @@ function Payment() {
 					setShow('loading');
 					setMessage('Success');
 					setAlert('success');
+					navigate.replace('/payment');
 				}, 300);
-				location.reload();
 			}
 		} catch (error) {
 			setMessage(error.response.data.message);
