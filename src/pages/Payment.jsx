@@ -51,6 +51,7 @@ function Payment() {
 					setMessage('Success');
 					setAlert('success');
 				}, 300);
+				location.reload();
 			}
 		} catch (error) {
 			setMessage(error.response.data.message);
