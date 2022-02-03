@@ -23,6 +23,7 @@ const reducer = (state, action) => {
 				ispending: payload.ispending,
 			};
 		case 'PAYMENT_SUCCESS':
+			console.log(state, initialState);
 			return {
 				...state,
 				ispending: true,

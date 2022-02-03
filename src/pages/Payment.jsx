@@ -50,7 +50,6 @@ function Payment() {
 					setShow('loading');
 					setMessage('Success');
 					setAlert('success');
-					dispatch('PAYMENT_SUCCESS');
 				}, 300);
 			}
 		} catch (error) {
